@@ -1,0 +1,199 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CRUD</title>
+  </head>
+  <h1>Persons List</h1>
+  <p><a href="/inserir.html">INSERT NEW USER</a></p>
+  <link rel="stylesheet" href="design.css">
+  <script>
+    const url = '/persons';
+  
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let persons = data;
+        let saida = '';
+        persons.map(function(person) {
+          saida += '<strong> '+ `${person.name}` + '</strong> ' + ' - ' + `${person.photo}`  + ' - ' +  `${person.role}`;
+          saida += ' - <a href="/atualizar.html?idp=' + `${person.idp}` + '">EDITAR</a>';
+          saida += ' | <a href="/personRemove?idp='+`${person.idp}`+'">REMOVER</a></br>';
+        });
+        document.getElementById('resultado').innerHTML = saida;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+      
+
+  </script>
+
+  <body class="corpo">
+    <div id="resultado"></div>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Profile</title>
+	<link rel="stylesheet" type="text/css" href="design.css">
+	<script src=´https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js´></script>
+	<script src="./backend/night-mode.js"></script>
+</head>
+<body>
+	<header>
+		<h1>My profile</h1>
+	</header>
+	<div class="container">
+		<section id="personal-info" class="group">
+			<h2>Personal Information</h2>
+      <p id="resultado1"></p>
+      <script>
+        const url1 = '/persons';
+        fetch(url1)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            let persons = data;
+            let saida = '';
+            persons.map(function(person) {
+              saida += '<strong>Name: </strong>' + `${person.name}` + '</br>' + '<strong>Photo: </strong>' + `${person.photo}` + '</br>' + '<strong>Role: </strong>' + `${person.role}`
+            });
+            document.getElementById('resultado1').innerHTML = saida;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      </script>
+		</section>
+		
+		<section id="about-me" class="group">
+      <h2>About Me</h2>
+      <p id="resultado2"></p>
+      <script>
+          const url2 = '/about/View';
+          fetch(url2)
+              .then((response) => {
+                  return response.json();
+              })
+              .then((data) => {
+                  let saida = '';
+                  data.map(function(about) {
+                      saida += '<strong>Adress: </strong>' + `${about.adress}` + '</br>' 
+                      + '<strong>Telephone: </strong>' + `${about.telephone}` + '</br>' 
+                      + '<strong>Email: </strong>' + `${about.email}` + '</br>' 
+                      + '<strong>Description: </strong>' + `${about.description_about}` + '</br>' 
+                  });
+                  document.getElementById('resultado2').innerHTML = saida;
+              })
+              .catch(function(error) {
+                  console.log(error);
+              });
+        </script>
+    </section>
+  
+		
+		<section id="training" class="group">
+			<h2>Training</h2>
+			<p id="resultado3"></p>
+      <script>
+        const url3 = '/trainingView';
+        fetch(url3)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let saida = '';
+                data.map(function(training) {
+                    saida += '<strong>DateInit: </strong>' + `${training.date_init_training}` + '</br>' 
+                    + '<strong>DateEnd: </strong>' + `${training.date_end_training}`
+                });
+                document.getElementById('resultado3').innerHTML = saida;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+      </script>
+		</section>
+		
+		<section id="experience" class="group">
+			<h2>Experience</h2>
+      <p id="resultado4"></p>
+      <script>
+          const url4 = '/expirience/View';
+          fetch(url4)
+              .then((response) => {
+                  return response.json();
+              })
+              .then((data) => {
+                  let saida = '';
+                  data.map(function(experience) {
+                      saida += '<strong>Enterprise: </strong>' + `${experience.enterprise_name}` + '</br>' + '<strong>Role: </strong>' + `${experience.role}` + '</br>' + '<strong>DateInit: </strong>' + `${experience.date_init_work}` + '</br>' + '<strong>DateEnd: </strong>' + `${experience.date_end_work}` + '</br>' 
+                  });
+                  document.getElementById('resultado4').innerHTML = saida;
+              })
+              .catch(function(error) {
+                  console.log(error);
+              });
+        </script>
+		</section>
+		
+		<section id="skills" class="group">
+			<h2>Skills</h2>
+      <p id="resultado5"></p>
+			<script>
+        const url5 = '/skills/View';
+        fetch(url5)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let saida = '';
+                data.map(function(skills) {
+                    saida += '<strong>Name: </strong>' + `${skills.name_skill}` + '</br>' + '<strong>Level: </strong>' + `${skills.level_skill}` 
+                });
+                document.getElementById('resultado5').innerHTML = saida;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+      </script>
+		</section>
+		
+		<section id="personality" class="group">
+			<h2>Personality</h2>
+      <p id="resultado6"></p>
+			<script>
+        const url6 = '/personality/View';
+        fetch(url6)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let saida = '';
+                data.map(function(personality) {
+                    saida += '<strong>Name: </strong>' + `${personality.name_trait}` + '</br>' + '<strong>Level: </strong>' + `${personality.level_trait}` 
+                });
+                document.getElementById('resultado6').innerHTML = saida;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+      </script>
+		</section>
+
+		
+	</div>
+
+
+</body>
+</html>
